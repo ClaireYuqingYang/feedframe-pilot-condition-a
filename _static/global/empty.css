@@ -21,15 +21,17 @@
     border-color: #333;
 }
 
-/* Informed mode: active informed button = green */
-body.ff-informed #informedBtn.active {
+/* Informed/general mode: active tab = green */
+body.ff-informed #informedBtn.active,
+body.ff-informed #generalBtn.active {
     background: #1a7a42;
     color: white;
     border-color: #1a7a42;
 }
 
-/* Entertained mode: active entertained button = orange */
-body.ff-entertained #entertainedBtn.active {
+/* Entertained/social mode: active tab = orange */
+body.ff-entertained #entertainedBtn.active,
+body.ff-entertained #socialBtn.active {
     background: #c05c10;
     color: white;
     border-color: #c05c10;
@@ -43,31 +45,6 @@ body.ff-entertained #entertainedBtn.active {
     background: #f1f1f1;
 }
 
-/* =========================================================
-   Base tweet card style
-   Target the actual full tweet row
-   ========================================================= */
-#tweet_table td > div.row.justify-content-start {
-    border-radius: 12px;
-    padding: 8px;
-    transition: background-color 0.35s ease;
-}
-
-/* =========================================================
-   Normal mode colors
-   IMPORTANT: no !important here
-   ========================================================= */
-body.ff-informed #tweet_table td > div.row.justify-content-start {
-    background-color: #eafff2;
-}
-
-body.ff-entertained #tweet_table td > div.row.justify-content-start {
-    background-color: #fff2e8;
-}
-
-/* =========================================================
-   Banner normal colors
-   ========================================================= */
 body.ff-informed .ff-banner {
     background-color: #d9f7e8;
     border: 2px solid #1a7a42;
@@ -83,71 +60,64 @@ body.ff-entertained .ff-banner {
 }
 
 /* =========================================================
-   Pulse animations
+   Base tweet card style
    ========================================================= */
-@keyframes informedPulse {
-    0% {
-        background-color: #eafff2;
-    }
-    50% {
-        background-color: #23a35ea1;
-    }
-    100% {
-        background-color: #eafff2;
-    }
+#tweet_table td > div.row.justify-content-start {
+    border-radius: 12px;
+    padding: 8px;
+    transition: background-color 0.25s ease;
 }
 
-@keyframes entertainedPulse {
-    0% {
-        background-color: #fff2e8;
-    }
-    50% {
-        background-color: #ffc78f;
-    }
-    100% {
-        background-color: #fff2e8;
-    }
+body.ff-informed #tweet_table td > div.row.justify-content-start {
+    background-color: #eafff2;
 }
 
-@keyframes informedBannerPulse {
+body.ff-entertained #tweet_table td > div.row.justify-content-start {
+    background-color: #fff2e8;
+}
+
+/* =========================================================
+   Blink animations: the active tab and mode banner darken quickly
+   ========================================================= */
+@keyframes informedBannerBlink {
     0% {
         background-color: #d9f7e8;
+        border-color: #1a7a42;
     }
-    50% {
-        background-color: #23a35ea1;
+    35% {
+        background-color: #a9e9c4;
+        border-color: #238a4d;
     }
+    70%,
     100% {
         background-color: #d9f7e8;
+        border-color: #1a7a42;
     }
 }
 
-@keyframes entertainedBannerPulse {
+@keyframes entertainedBannerBlink {
     0% {
         background-color: #ffe8d6;
+        border-color: #c05c10;
     }
-    50% {
-        background-color: #ffc78f;
+    35% {
+        background-color: #ffc795;
+        border-color: #d06c21;
     }
+    70%,
     100% {
         background-color: #ffe8d6;
+        border-color: #c05c10;
     }
 }
 
 /* =========================================================
-   Apply pulse during reminder window
+   Apply blink during reminder window
    ========================================================= */
-body.ff-informed.ff-pulsing #tweet_table td > div.row.justify-content-start {
-    animation: informedPulse 5s ease-in-out forwards;
+body.ff-informed.ff-blinking .ff-banner {
+    animation: informedBannerBlink 850ms ease-in-out forwards;
 }
 
-body.ff-entertained.ff-pulsing #tweet_table td > div.row.justify-content-start {
-    animation: entertainedPulse 5s ease-in-out forwards;
-}
-
-body.ff-informed.ff-pulsing .ff-banner {
-    animation: informedBannerPulse 5s ease-in-out;
-}
-
-body.ff-entertained.ff-pulsing .ff-banner {
-    animation: entertainedBannerPulse 5s ease-in-out;
+body.ff-entertained.ff-blinking .ff-banner {
+    animation: entertainedBannerBlink 850ms ease-in-out forwards;
 }

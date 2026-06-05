@@ -38,52 +38,52 @@ document.addEventListener("DOMContentLoaded", function () {
         setMode("entertained");
     });
 
-    let pulseTimeout = null;
-    let pulseLoopTimeout = null;
-    const minPulseInterval = 25000;
-    const maxPulseInterval = 35000;
+    let blinkTimeout = null;
+    let blinkLoopTimeout = null;
+    const minBlinkInterval = 25000;
+    const maxBlinkInterval = 35000;
 
-    function randomPulseInterval() {
-        return Math.floor(Math.random() * (maxPulseInterval - minPulseInterval + 1)) + minPulseInterval;
+    function randomBlinkInterval() {
+        return Math.floor(Math.random() * (maxBlinkInterval - minBlinkInterval + 1)) + minBlinkInterval;
     }
 
-    function triggerPulse() {
+    function triggerBlink() {
         // 先移除，确保动画可以重新开始
-        document.body.classList.remove("ff-pulsing");
+        document.body.classList.remove("ff-blinking");
 
         // 强制浏览器重算样式，帮助 animation 重新触发
         void document.body.offsetWidth;
 
         // 再加回来
-        document.body.classList.add("ff-pulsing");
+        document.body.classList.add("ff-blinking");
 
-        console.log("pulse started:", document.body.className);
+        console.log("blink started:", document.body.className);
 
         // 避免上一次 timeout 残留
-        if (pulseTimeout) {
-            clearTimeout(pulseTimeout);
+        if (blinkTimeout) {
+            clearTimeout(blinkTimeout);
         }
 
-        pulseTimeout = setTimeout(function () {
-            document.body.classList.remove("ff-pulsing");
-            console.log("pulse ended:", document.body.className);
-        }, 5000);
+        blinkTimeout = setTimeout(function () {
+            document.body.classList.remove("ff-blinking");
+            console.log("blink ended:", document.body.className);
+        }, 850);
     }
 
     // 暴露到 console，方便你手动测试
-    window.triggerPulse = triggerPulse;
+    window.triggerBlink = triggerBlink;
 
-    function scheduleNextPulse() {
-        if (pulseLoopTimeout) {
-            clearTimeout(pulseLoopTimeout);
+    function scheduleNextBlink() {
+        if (blinkLoopTimeout) {
+            clearTimeout(blinkLoopTimeout);
         }
 
-        pulseLoopTimeout = setTimeout(function () {
-            triggerPulse();
-            scheduleNextPulse();
-        }, randomPulseInterval());
+        blinkLoopTimeout = setTimeout(function () {
+            triggerBlink();
+            scheduleNextBlink();
+        }, randomBlinkInterval());
     }
 
-    // Randomize each breathing cue between 25 and 35 seconds.
-    scheduleNextPulse();
+    // Randomize each blink cue between 25 and 35 seconds.
+    scheduleNextBlink();
 });
