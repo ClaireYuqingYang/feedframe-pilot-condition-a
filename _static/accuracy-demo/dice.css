@@ -1,0 +1,23 @@
+.accuracy-ui{padding:0 16px 14px;color:#202521;font-family:Arial,Helvetica,sans-serif;letter-spacing:0}
+.accuracy-ui[hidden],.demo-controls[hidden],.demo-controls button[hidden]{display:none!important}
+.demo-controls{position:fixed;right:12px;bottom:12px;z-index:1050;max-width:calc(100vw - 24px);width:210px;background:#fff;border:1px solid #d8ded9;border-radius:6px;box-shadow:0 3px 14px #00000012;font:13px Arial,Helvetica,sans-serif;color:#555f58}
+.demo-controls:not([open]){width:auto;opacity:.7}.demo-controls summary{cursor:pointer;padding:9px 12px;font-size:12px;min-height:34px}
+.demo-controls-body{padding:4px 12px 12px;display:grid;gap:7px}.demo-controls select{width:100%;padding:8px 4px;border:1px solid #bdc8be;border-radius:4px;background:white;font:inherit}.demo-controls .quiet{padding:7px 4px;text-align:left;background:white;border:0;border-radius:4px;color:#267054;font:inherit}.demo-controls small{font-size:11px;line-height:1.5;color:#747e77}
+.accuracy-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:10px;text-align:left}
+.accuracy-toolbar>div{flex:1;min-width:130px;font-size:14px}.accuracy-toolbar strong span{color:#267054}.accuracy-toolbar small{display:block;font-size:11px;color:#68746d;margin-top:3px}
+.accuracy-toolbar select{font-size:12px;padding:8px;border:1px solid #bdc8be;border-radius:6px;background:white;max-width:100%}
+.accuracy-ui .quiet,.accuracy-dialog .quiet{background:transparent;border:0;color:#57606a;font-size:13px;padding:8px 4px;min-height:36px;border-radius:6px}
+.accuracy-ui .banner{background:#f2f4f7;border:1px solid #c9d1d9;border-radius:8px;padding:10px 14px;overflow-wrap:anywhere;text-align:center;color:#1f2328;max-width:600px;margin:0 auto}
+.accuracy-ui .eyebrow{font-size:13px;font-weight:400;color:#57606a;margin:0 0 4px}.accuracy-dialog .eyebrow{font-size:11px;font-weight:700;color:#57606a;margin:0 0 7px}
+.accuracy-ui .goal-line{font-size:17px;line-height:1.5;font-weight:700;margin:0}.accuracy-ui .plus{color:inherit;padding:0 5px}.accuracy-ui .plan-line{font-size:15px;line-height:1.5;margin:4px 0 0;color:#1f2328}
+.accuracy-ui .banner.importance{background:#e8f0fe;border:2px solid #2563eb;padding:12px 16px}.accuracy-ui .banner.importance .eyebrow{color:#1d4ed8;font-size:14px;font-weight:700;text-transform:uppercase}.accuracy-ui .banner.importance .goal-line{font-size:19px;font-weight:400}
+.accuracy-dialog{border:1px solid #dde3dd;border-radius:8px;width:min(620px,calc(100% - 24px));max-height:90dvh;padding:28px;color:#202521;background:white;box-shadow:0 24px 100px #17261c26}
+.accuracy-dialog::backdrop{background:#18271e66}.accuracy-dialog-head{display:flex;justify-content:space-between;align-items:center}
+.accuracy-dialog h2{font-size:24px;line-height:1.3;margin:14px 0}.accuracy-dialog #setup-intro{font-size:14px;line-height:1.7;color:#627067}
+.accuracy-dialog fieldset{border:0;margin:20px 0;padding:0;display:grid;gap:8px}.accuracy-dialog .option{display:flex;align-items:flex-start;gap:12px;border:1px solid #dde3dd;padding:13px;border-radius:6px;font-size:14px;line-height:1.5;cursor:pointer}
+.accuracy-dialog .option:has(input:checked){border-color:#57606a;background:#f2f4f7}.accuracy-dialog .option input{accent-color:#57606a;margin:4px 0 0;flex:none}
+.accuracy-dialog .dialog-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:20px}.accuracy-dialog .primary{background:#1f2328;color:white;padding:13px 18px;font-weight:600;min-height:46px;border:0;border-radius:6px}
+.accuracy-dialog .error{color:#a72a42;font-size:13px;min-height:16px}.accuracy-dialog #custom-wrap{font-size:14px;line-height:1.6;display:block}.accuracy-dialog #custom{width:100%;border:1px solid #aab7ac;border-radius:6px;padding:12px;margin-top:8px}
+.accuracy-ui button:focus-visible,.accuracy-ui select:focus-visible,.accuracy-dialog button:focus-visible,.accuracy-dialog input:focus-visible{outline:3px solid #2781c8;outline-offset:2px}
+.accuracy-ui .sr-only,.accuracy-dialog .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.accuracy-dialog [hidden]{display:none!important}
+@media(max-width:600px){.accuracy-ui{padding:0 10px 10px}.accuracy-ui .banner{padding:10px 12px}.accuracy-ui .goal-line{font-size:15px}.accuracy-ui .plan-line{font-size:12px}.accuracy-toolbar{gap:6px}.accuracy-toolbar>div{font-size:12px}.accuracy-dialog{padding:18px}.accuracy-dialog h2{font-size:21px}}

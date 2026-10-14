@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Accuracy+ | FeedFrame</title>
+  <link rel="stylesheet" href="demo.css">
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <header class="masthead"><a class="brand" href="index.html">Feed<span>Frame</span><sup>+</sup></a><span class="demo-label">Interactive demo</span><button id="restart" class="quiet">Start over</button></header>
+  <div class="layout">
+    <aside class="sidebar"><p class="eyebrow">YOUR SPACE</p><h1>A little intention.<br>A different feed.</h1><p class="intro">What matters to you<br>when you share?</p><label class="eyebrow" for="version">TRY A VERSION</label><select id="version"><option value="goals">Accuracy+</option><option value="plan">Accuracy+ Plan</option><option value="importance">Accuracy Importance</option></select><button id="edit" class="primary">Set my sharing goal</button><div class="side-note"><span class="small-plus">+</span><p>Your goals stay with you<br>as you scroll.</p></div><p class="footnote">Demo only · Nothing is submitted.</p></aside>
+    <main id="feed"><div class="feed-top"><div class="feed-title"><h2>Your feed</h2><span>For you</span></div><section id="banner" class="banner" aria-live="polite"></section></div><div id="posts"></div><footer class="feed-end">You're all caught up.<button id="back-top" class="quiet">Back to top ↑</button></footer></main>
+    <aside class="right"><p class="eyebrow">A MOMENT BEFORE SHARING</p><h2>Make it yours.</h2><p>You may want what you share to be accurate, but in the moment, other reasons for sharing can take over.</p><p>Your sharing goal has two parts: how you'll stay accurate, and what else matters to you when you share.</p><div class="rule"></div><p class="eyebrow">MY SHARING GOAL</p><p id="side-summary">Choose what matters to you.</p><button id="side-edit" class="quiet">Choose my goal ↗</button></aside>
+  </div>
+  <dialog id="setup" aria-labelledby="setup-title"><form id="setup-form"><div class="dialog-head"><span class="eyebrow" id="step-label"></span><button type="button" id="close" class="quiet" aria-label="Close goal settings">✕</button></div><h2 id="setup-title"></h2><p id="setup-intro"></p><fieldset id="choices"><legend class="sr-only">Choose one option</legend></fieldset><label id="custom-wrap" hidden>Your own words<input id="custom" maxlength="160" autocomplete="off"></label><p class="error" id="error" role="alert"></p><div class="dialog-actions"><button type="button" id="back" class="quiet">Back</button><button class="primary" id="next">Continue →</button></div></form></dialog>
+  <dialog id="reply" aria-labelledby="reply-title"><form id="reply-form"><h2 id="reply-title">Join the conversation</h2><label for="reply-text">Your reply</label><textarea id="reply-text" rows="4" maxlength="500" required></textarea><div class="dialog-actions"><button type="button" id="cancel-reply" class="quiet">Cancel</button><button class="primary">Reply</button></div></form></dialog><div id="toast" role="status"></div>
+</body>
+</html>

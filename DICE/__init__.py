@@ -263,6 +263,10 @@ def create_redirect(player):
 class A_Intro(Page):
     form_model = 'player'
     @staticmethod
+    def is_displayed(player):
+        return not player.session.is_demo
+
+    @staticmethod
     def before_next_page(player, timeout_happened):
         pass
 
@@ -271,7 +275,7 @@ class B_Briefing(Page):
 
     @staticmethod
     def is_displayed(player):
-        return len(player.session.config['briefing']) > 0
+        return not player.session.is_demo and len(player.session.config['briefing']) > 0
 
 
 class C_Feed(Page):
