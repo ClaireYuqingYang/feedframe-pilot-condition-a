@@ -235,7 +235,7 @@ def preprocessing(df):
     # check profile image urls
     # df['profile_pic_available'] = df['user_image'].apply(
         # lambda x: check_url_exists(x) if pd.notnull(x) else False)
-    df['profile_pic_available'] = True
+    df['profile_pic_available'] = df['user_image'].fillna('').astype(str).str.match(r'^(https?://|/static/)')
 
     return df
 
@@ -295,11 +295,21 @@ class C_Feed(Page):
     @staticmethod
     def vars_for_template(player: Player):
         # ad = player.ad_condition
+        tweets = player.participant.tweets
+        # Presentation sessions read current stimuli without rewriting stored participant data.
+        if player.session.is_demo and player.session.config['data_path'] == 'DICE/static/data/main_study_demo.csv':
+            tweets = preprocessing(pd.read_csv(player.session.config['data_path'], sep=';'))
+        tweets = tweets.copy()
+        if 'views' not in tweets.columns:
+            tweets['views'] = 0
+        tweets['views_display'] = tweets['views'].fillna(0).map(
+            lambda value: f'{float(value) / 1000:.1f}K' if float(value) >= 1000 else str(int(value))
+        )
         label_available = False
         if player.participant.label is not None:
             label_available = True
         return dict(
-            tweets=player.participant.tweets.to_dict('index'),
+            tweets=tweets.to_dict('index'),
             topics=player.session.config['topics'],
             search_term=player.session.config['search_term'],
             label_available=label_available,

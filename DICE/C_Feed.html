@@ -1,10 +1,12 @@
+{{ block title }}X{{ endblock }}
+
 {{ block scripts }}
 <script src="{{ static 'js/bootstrap_components.js' }}"></script>
 <script src="{{ static 'js/preloader.js' }}"></script>
 <script src="{{ static 'js/gradients.js' }}"></script>
 <script src="{{ static 'js/mobile.js' }}"></script>
 <!-- feedframe js -->
-<script src="{{ static 'accuracy-demo/demo.js' }}" defer></script>
+<script src="{{ static 'accuracy-demo/demo.js' }}?v=20261019-reminder" defer></script>
 <script src="{{ static 'js/like_button.js' }}"></script>
 <script src="{{ static 'js/interactions.js' }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -16,7 +18,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ static 'css/styles.css' }}">
 <link rel="stylesheet" href="{{ static 'global/empty.css' }}">
-<link rel="stylesheet" href="{{ static 'accuracy-demo/dice.css' }}">
+<link rel="stylesheet" href="{{ static 'accuracy-demo/dice.css' }}?v=20261019-x">
+<link rel="stylesheet" href="{{ static 'accuracy-demo/x.css' }}?v=20261019-empty-sides">
 {{ endblock }}
 
 
@@ -24,8 +27,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitter Mockup</title>
-    <link rel="icon" href="https://twitter.com/favicon.ico"/>
+    <title>X</title>
 </head>
 
 <body class="bg-light">
@@ -45,7 +47,7 @@
 
     <!-- Loading Screen -->
     <div id="loadingScreen" class="d-flex justify-content-center align-items-center twitter-loading-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;">
-        <i class="bi bi-twitter text-white twitter-logo-animate" style="font-size: 4rem;"></i>
+        <span class="platform-wordmark" aria-label="X">&#120143;</span>
     </div>
 
     <!-- Main Content -->
@@ -55,42 +57,6 @@
 
             <!-- LHS -->
             <div class="col overflow-auto d-none d-md-block col-md-3 py-0 pe-5 full-height" id="LHS">
-                <div class="d-flex justify-content-end">
-                    <div>
-                        <h1 class="mt-3 ms-3">
-                            <i class="bi bi-twitter text-primary"></i>
-                        </h1>
-
-                        <div class="btn-group-vertical">
-                            <button class="btn btn-light rounded-5 mt-5 text-start text-secondary" type="button" disabled>
-                                <i class="bi bi-house"></i> Home
-                            </button>
-                            <button class="btn btn-light rounded-5 mt-3 text-start text-dark" type="button" disabled>
-                                <i class="bi bi-hash"></i>
-                                <b>Explore</b>
-                            </button>
-                            <button class="btn btn-light rounded-5 mt-3 text-start text-secondary" type="button" disabled>
-                                <i class="bi bi-bell"></i> Notifications
-                            </button>
-                            <button class="btn btn-light rounded-5 mt-3 text-start text-secondary" type="button" disabled>
-                                <i class="bi bi-envelope"></i> Messages
-                            </button>
-                            <button class="btn btn-light rounded-5 mt-3 text-start text-secondary" type="button" disabled>
-                                <i class="bi bi-bookmark"></i> Bookmarks
-                            </button>
-                            <button class="btn btn-light rounded-5 mt-3 text-start text-secondary" type="button" disabled>
-                                <i class="bi bi-file-medical"></i> Lists
-                            </button>
-                            <button class="btn btn-light rounded-5 mt-3 text-start text-secondary" type="button" disabled>
-                                <i class="bi bi-person-circle"></i> Profile
-                            </button>
-
-                            <input class="btn btn-primary rounded-5 mt-5 mb-5" type="button" value="Tweet"
-                                   data-bs-toggle="modal" data-bs-target="#tweetModal">
-                        </div>
-
-                    </div>
-                </div>
             </div>
 
             <!-- Feed -->
@@ -99,15 +65,11 @@
                 <!-- Sticky header: Navbar + FeedFrame Toggle + Banner -->
                 <div class="sticky-top bg-white shadow-sm" style="opacity:0.95; z-index:100;">
 
+                    <div class="x-feed-brand" role="img" aria-label="X">&#120143;</div>
                     <!-- Navbar -->
                     <div class="d-flex m-0 p-0 justify-content-center">
 
-                        <input class="form-control m-3 rounded-5 text-dark"
-                           type="text"
-                           value="search: {{ search_term }}"
-                           aria-label="readonly input example"
-                           style="background-color: #FFFFFF"
-                           readonly>
+                        <div class="platform-feed-heading"><span>For you</span><span>Following</span><span class="x-selected"><i class="bi bi-newspaper"></i> Current events</span></div>
 
                         <h1 class="mt-3 me-3 text-secondary d-md-none">
                             <i class="bi bi-person-circle sticky-bottom"></i>
@@ -117,6 +79,12 @@
                     {{ include 'DICE/T_Accuracy_Goals.html' }}
                 </div>
 
+                <div class="x-composer">
+                    <i class="bi bi-person-circle x-profile" aria-hidden="true"></i>
+                    <button type="button" class="x-compose-prompt" data-bs-toggle="modal" data-bs-target="#tweetModal">What's happening?</button>
+                    <div class="x-compose-tools" aria-hidden="true"><i class="bi bi-image"></i><i class="bi bi-file-play"></i><i class="bi bi-list-ul"></i><i class="bi bi-emoji-smile"></i><i class="bi bi-calendar-event"></i><i class="bi bi-geo-alt"></i></div>
+                    <button type="button" class="x-compose-post" data-bs-toggle="modal" data-bs-target="#tweetModal">Post</button>
+                </div>
                 <table class="table table-hover border-start border-end p-0 m-0 bg-white" id="tweet_table">
                     <tbody>
 
@@ -138,13 +106,6 @@
 
             <!-- RHS -->
             <div class="col overflow-auto d-none d-md-block col-md-3 p-0 full-height" id="RHS" style="position: relative;">
-                {{ if topics }}
-                    <!-- Include Trending Topics -->
-                    {{ include C.TOPICS_TEMPLATE }}
-                {{ else }}
-                    <!-- Include Banner -->
-                    {{ include C.BANNER_TEMPLATE }}
-                {{ endif }}
             </div>
         </div>
     </div>
@@ -182,7 +143,7 @@
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-primary w-25 rounded-5"
-                            data-bs-dismiss="modal">Tweet</button>
+                            data-bs-dismiss="modal">Post</button>
                 </div>
             </div>
         </div>

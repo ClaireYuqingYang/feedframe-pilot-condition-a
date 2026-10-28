@@ -30,18 +30,18 @@ SESSION_CONFIG_DEFAULTS = dict(
     url_param = 'PROLIFIC_PID',
     condition_name = 'C3',
     briefing = '', # '<h5>This could be your briefing</h5><p>Use HTML syntax to format your content to your liking.</p>',
-    data_path='DICE/static/data/pilot1_stimuli.csv', # 'https://raw.githubusercontent.com/Howquez/oFeeds/main/software/DICE/DICE/static/data/sample_tweets.csv', #'DICE/DICE/data/sample_tweets.csv',
-    sort_by='datetime',
-    shuffle_feed=True,
+    data_path='DICE/static/data/main_study_demo.csv',
+    sort_by='sequence',
+    shuffle_feed=False,
     condition_col='',
-    set_col='set',
+    set_col='',
     topics = True,
     # copy_text = '50M Jobseekers. <br><br> 150+ Job Boards. <br><br> One Click.',
     copy_text= '', # 'Happy<br>National<br>Fried Chicken<br>Day!',
     show_cta = False,
     cta_text = '', # 'Post Jobs Free',
     landing_page = 'https://unisg.qualtrics.com/jfe/form/SV_0DnMoLpM0VxjhrM',
-    search_term = '#Yosemite',
+    search_term = 'News',
 )
 
 PARTICIPANT_FIELDS = ['tweets', 'finished']

@@ -1,5 +1,13 @@
 # Accuracy+ UI demo
 
+## October main-study update
+
+The integrated banners now follow FF_Main_Study_Banners_Oct_2026.qsf: all three interventions share the blue background (#e8f0fe), blue border (#2563eb), centered text, and blue uppercase heading. Accuracy goals include all five updated options. Control has no banner.
+
+New sessions use DICE/static/data/main_study_demo.csv with four supplied pilot headlines in this fixed order: HuffPost (marmot meat), The Economist (psychedelic tourism), Daily Mail (teacher), and BBC (plane). No quality labels appear in the UI. Dates and nonzero initial engagement counts are presentation placeholders, not observed engagement. Counts are fixed per post, not randomized on each page load. Demo sessions configured with this CSV reload the current stimuli when the feed renders; other sessions retain their stored data.
+
+BBC and Economist logos reuse local assets. HuffPost and Daily Mail use supplied square logos with circular masks. Article preview images and logos are served locally. The X-style feed retains empty side columns and displays a centered X above the tabs. The Current events tab and Reminder banner label avoid naming the manipulation. Demo settings remain available in the lower-right corner; H hides or restores them when not typing.
+
 Condition A's DICE/C_Feed.html now includes T_Accuracy_Goals.html and loads demo.js with scoped dice.css. The original DICE posts and reaction controls remain. oTree demo sessions skip introduction and briefing pages. The feed is presentation-only: timers, dwell/scroll tracking, and form submission are disabled. oTree still creates its normal session and participant records; this is not a production data-collection configuration.
 
 The earlier standalone index.html is retained as a design reference. Use the oTree Demo entry to preview the integrated UI.

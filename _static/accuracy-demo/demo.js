@@ -4,13 +4,29 @@ const integratedDICE = Boolean($('accuracy-ui'));
 // Presentation mode keeps the existing feed interactive without submitting to oTree.
 if (integratedDICE) {
   $('accuracy-ui').closest('form')?.addEventListener('submit', event => event.preventDefault());
+  document.querySelectorAll('.x-bookmark').forEach(button => {
+    button.onclick=()=>{
+      const selected=button.getAttribute('aria-pressed')!=='true';
+      button.setAttribute('aria-pressed',String(selected));
+      button.setAttribute('aria-label',selected?'Remove bookmark':'Bookmark post');
+      button.querySelector('span').className=selected?'bi bi-bookmark-fill':'bi bi-bookmark';
+    };
+  });
+  // Existing demo sessions retain the old avatar path in their feed snapshots.
+  document.querySelectorAll('#tweet_table img[src="/static/img/avatars/nypost.ico"]').forEach(img => {
+    img.src='/static/img/avatars/nypost.png';
+  });
+  document.querySelectorAll('#tweet_table img[src="/static/img/avatars/huffpost.svg"]').forEach(img => {
+    img.src='/static/img/avatars/huffpost.png';
+  });
 }
-// Wording and short forms follow QID4/5/7 and embedded data in the September QSF.
+// Wording and short forms follow the October main-study QSF.
 const accuracy = [
   ["I'm someone who shares things that are true", "I share what's true"],
   ["I'm someone who thinks before passing things along", "I think before I share"],
   ["I'm someone who shares things people can trust", "I share what people can trust"],
-  ["I'm someone who shares things I'd vouch for as true", "I vouch for what's true"]
+  ["I'm someone who gets the facts straight in what I post", "I get the facts straight"],
+  ["I'm someone who doesn't get fooled into spreading false stories", "I don't get fooled into spreading false stories"]
 ];
 const goals = [
   ['I share things that make people laugh','I make people laugh','funny'],
@@ -57,12 +73,12 @@ function renderBanner(){
   if(state.version==='control') return;
   const ready=state.version==='importance'?state.importance!==null:state.accuracy!==null&&state.goal!==null;
   let summary='Choose what matters to you.';
-  if(!ready){banner.append(text('p',state.version==='importance'?'ACCURACY IMPORTANCE':'ACCURACY+','eyebrow'),text('p',state.version==='importance'?'How important is accuracy to you?':'What kind of sharer do you want to be?','goal-line'));}
+  if(!ready){banner.append(text('p','Reminder','eyebrow'),text('p',state.version==='importance'?'How important is accuracy to you?':'What kind of sharer do you want to be?','goal-line'));}
   else if(state.version==='importance'){
     banner.append(text('p','Reminder','eyebrow'));
     const p=text('p','You said it is ','goal-line');p.append(text('strong',importance[state.importance]),document.createTextNode(' to you that the news articles you share are accurate.'));banner.append(p);summary=p.textContent;
   }else{
-    banner.append(text('p','My sharing goal:','eyebrow'));
+    banner.append(text('p','My sharing goals','eyebrow'));
     const p=text('p',accuracy[state.accuracy][1],'goal-line');p.append(text('span','+','plus'),document.createTextNode(goalText(state)));banner.append(p);summary=p.textContent;
     if(state.version==='plan'&&state.plan!==null){
       const line=text('p','','plan-line');
@@ -79,10 +95,10 @@ function renderBanner(){
 }
 function openSetup(){draft={...state};step=draft.version==='importance'?3:0;renderStep();$('setup').showModal();}
 function renderStep(){
-  const isPlan=step===2;const title=step===0?'Choose the kind of sharer you want to be.':step===1?'What else matters to you when you share?':isPlan?'Make a plan that puts both parts into practice.':'How important is accuracy to you?';
+  const isPlan=step===2;const title=step===0?'Which of these accuracy goals fits you best as a sharer?':step===1?'Which of these goals also fits you as a sharer?':isPlan?'Make a plan that puts both goals into practice.':'How important is accuracy to you?';
   $('step-label').textContent=step===3?'ACCURACY IMPORTANCE':`STEP ${step+1} OF ${draft.version==='plan'?3:2}`;
   $('setup-title').textContent=title;
-  $('setup-intro').textContent=step===0?"Your sharing goal has two parts: how you'll stay accurate, and what else matters to you when you share.":step===1?'Now choose what else matters to you when you share.':isPlan?`When something ${phrase(draft)} catches my eye, I'll ______ before I share it.`:'How important is it to you that you only share news articles on social media if they are accurate?';
+  $('setup-intro').textContent=step===0?"You may want to share posts that are accurate, but you may also share for other reasons at the same time. With our new feature, you set 2 goals: an accuracy goal and one other goal of your choice. Your goals will appear at the top of your feed as a reminder while you scroll.":step===1?"Several may fit, so pick the one you'd most like in your reminder.":isPlan?`When something ${phrase(draft)} catches my eye, I'll ______ before I share it.`:'How important is it to you that you only share news articles on social media if they are accurate?';
   const values=step===0?accuracy.map(x=>x[0]):step===1?goals.map(x=>x[0]):isPlan?plans.map(x=>x[0].replace('PHRASE',phrase(draft))):importance;
   const key=['accuracy','goal','plan','importance'][step];
   $('choices').replaceChildren(text('legend','Choose one option','sr-only'));

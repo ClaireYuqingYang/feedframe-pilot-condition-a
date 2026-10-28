@@ -1,0 +1,5 @@
+doc_id;datetime;tweet;media;alt_text;likes;retweets;replies;username;handle;user_description;user_image;user_followers;commented_post;sponsored;target;condition;sequence;views
+2;2026-10-14;Couple Dies Of Bubonic Plague After Eating Raw Marmot Meat;/static/img/headlines/01_huffpost_marmot_preview.jpg;A marmot standing on a rock;128;64;9;@HuffPost;HuffPost;;/static/img/avatars/huffpost.png;0;;0;;;0;791
+1;2026-10-14;Psychedelic tourism is a niche but growing market;/static/img/headlines/02_economist_psychedelic_tourism.png;Colorful illustration accompanying the psychedelic tourism article;140;50;5;@TheEconomist;The Economist;;/static/img/avatars/C_2.jpg;0;;0;;;1;1141
+3;2026-10-14;Teacher at top London secondary school can't read or write;/static/img/headlines/03_dailymail_school_preview.jpg;Exterior of St Thomas More Catholic School;179;55;7;@DailyMail;Daily Mail;;/static/img/avatars/dailymail.png;0;;0;;;2;1128
+0;2026-10-14;Plane with the largest wingspan in the world takes flight;/static/img/headlines/04_bbc_plane_preview.jpg;Twin-fuselage aircraft on a runway;155;58;4;@BBCNews;BBC;;/static/img/avatars/C_6.jpg;0;;0;;;3;691
