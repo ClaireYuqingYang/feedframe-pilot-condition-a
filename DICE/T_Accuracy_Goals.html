@@ -1,6 +1,7 @@
-<section id="accuracy-ui" class="accuracy-ui" aria-label="FeedFrame sharing goals">
+<section id="accuracy-ui" class="accuracy-ui" aria-label="FeedFrame sharing goals" data-condition="{{ player.feed_condition }}">
     <div id="banner" class="banner" aria-live="polite"></div>
 </section>
+{{ if session.config.show_demo_controls }}
 <details id="demo-controls" class="demo-controls">
     <summary>Demo settings</summary>
     <div class="demo-controls-body">
@@ -17,3 +18,4 @@
         <small>Press H to show or hide settings.</small>
     </div>
 </details>
+{{ endif }}

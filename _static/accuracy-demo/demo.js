@@ -57,7 +57,11 @@ const posts = [
   ['New York Post','nypost.com','TSA finds missile launcher in passenger’s checked bag'],
   ['New York Post','nypost.com','Uncle Sam offering $1K to people who adopt untrained wild horse or burro']
 ];
-let state = {version:'goals',accuracy:null,goal:null,plan:null,importance:null,customGoal:'',customPlan:''};
+// Read condition from server-side player.feed_condition, fall back to 'goals' for standalone preview
+const serverCondition = integratedDICE ? $('accuracy-ui')?.getAttribute('data-condition') : null;
+const validConditions = ['control', 'goals', 'plan', 'importance'];
+const initialVersion = validConditions.includes(serverCondition) ? serverCondition : 'goals';
+let state = {version:initialVersion,accuracy:null,goal:null,plan:null,importance:null,customGoal:'',customPlan:''};
 let draft, step, toastTimer, replyTarget;
 const text = (tag, value, className) => {const el=document.createElement(tag);el.textContent=value;if(className)el.className=className;return el;};
 const phrase = s => goals[s.goal ?? 0][2];
@@ -67,7 +71,7 @@ function notify(message){$('toast').textContent=message;$('toast').style.display
 function renderBanner(){
   if (integratedDICE) {
     $('accuracy-ui').hidden=state.version==='control';
-    $('edit').hidden=state.version==='control';
+    if ($('edit')) $('edit').hidden=state.version==='control';
   }
   const banner=$('banner');banner.replaceChildren();banner.classList.toggle('importance',state.version==='importance');
   if(state.version==='control') return;
@@ -122,11 +126,14 @@ if (integratedDICE) {
   });
 } else $('setup-form').onsubmit=advanceSetup;
 $('back').onclick=()=>{step--;renderStep();};$('close').onclick=()=>$('setup').close();
-$('version').onchange=()=>{
-  state.version=$('version').value;renderBanner();
-  if (state.version!=='control') openSetup();
-};
-if (integratedDICE) {
+if (integratedDICE && $('version')) $('version').value = state.version;
+if ($('version')) {
+  $('version').onchange=()=>{
+    state.version=$('version').value;renderBanner();
+    if (state.version!=='control') openSetup();
+  };
+}
+if (integratedDICE && $('demo-controls')) {
   $('hide-controls').onclick=()=>{ $('demo-controls').hidden=true; };
   document.addEventListener('keydown',event=>{
     if(event.key.toLowerCase()!=='h'||event.ctrlKey||event.metaKey||event.altKey||
@@ -148,10 +155,12 @@ if (!integratedDICE) {
   $('reply-form').onsubmit=event=>{event.preventDefault();const value=$('reply-text').value.trim();if(!value)return;replyTarget.append(text('p',value));$('reply').close();};
   $('cancel-reply').onclick=()=>$('reply').close();$('back-top').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 }
-$('restart').onclick=()=>{
-  if (integratedDICE) { window.location.reload(); return; }
-  state={version:'goals',accuracy:null,goal:null,plan:null,importance:null,customGoal:'',customPlan:''};$('version').value='goals';renderPosts();renderBanner();window.scrollTo(0,0);openSetup();
-};
+if ($('restart')) {
+  $('restart').onclick=()=>{
+    if (integratedDICE) { window.location.reload(); return; }
+    state={version:'goals',accuracy:null,goal:null,plan:null,importance:null,customGoal:'',customPlan:''};$('version').value='goals';renderPosts();renderBanner();window.scrollTo(0,0);openSetup();
+  };
+}
 if (!integratedDICE) renderPosts();
 renderBanner();
 })();

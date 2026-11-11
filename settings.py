@@ -23,12 +23,13 @@ ROOMS = [
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00,
     participation_fee=0,
+    show_demo_controls=False,
     title = '',
     full_name = '',
     eMail = '',
     survey_link = 'https://nyu.qualtrics.com/jfe/form/SV_3rtFCzDYy5n2WXQ',
     url_param = 'PROLIFIC_PID',
-    condition_name = 'C3',
+    condition_name = 'goals', # 'goals', 'plan', 'importance', 'control'
     briefing = '', # '<h5>This could be your briefing</h5><p>Use HTML syntax to format your content to your liking.</p>',
     data_path='DICE/static/data/main_study_demo.csv',
     sort_by='sequence',
@@ -61,5 +62,5 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 DEMO_PAGE_INTRO_HTML = """ """
 
-SECRET_KEY = '8744261096089'
+SECRET_KEY = environ.get('OTREE_SECRET_KEY', '8744261096089')
 DEBUG = False
