@@ -37,12 +37,10 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    # ad_condition = models.StringField(doc='indicates the ad condition a player is randomly assigned to')
     feed_condition = models.StringField(doc='indicates the feed condition a player is randomly assigned to')
     set_condition = models.StringField(doc='indicates the headline set a player is randomly assigned to', blank=True)
     sequence = models.StringField(doc='prints the sequence of tweets based on doc_id')
 
-    # cta = models.BooleanField(doc='indicates whether CTA was clicked or not')
     scroll_sequence = models.LongStringField(doc='tracks the sequence of feed items a participant scrolled through.')
     viewport_data = models.LongStringField(doc='tracks the time feed items were visible in a participants viewport.')
     likes_data = models.LongStringField(doc='tracks likes.', blank=True)
@@ -54,6 +52,14 @@ class Player(BasePlayer):
                                            blank=True)
     device_type = models.StringField(doc="indicates the participant's device type based on screen width.",
                                            blank=True)
+
+    # Accuracy Goals questionnaire responses (captured client-side via demo.js, submitted via live_method)
+    accuracy_choice = models.IntegerField(doc='index of chosen accuracy statement (0-4)', blank=True)
+    goal_choice = models.IntegerField(doc='index of chosen sharing goal (0-8, where 8 = "Other")', blank=True)
+    plan_choice = models.IntegerField(doc='index of chosen plan statement (0-6, where 6 = "Write my own")', blank=True)
+    importance_choice = models.IntegerField(doc='5-point rating of accuracy importance (0-4)', blank=True)
+    custom_goal = models.LongStringField(doc='participant-written goal when "Other" chosen in step 2', blank=True)
+    custom_plan = models.LongStringField(doc='participant-written plan when "Write my own" chosen in step 3', blank=True)
 
 
 
@@ -319,6 +325,22 @@ class C_Feed(Page):
 
     @staticmethod
     def live_method(player, data):
+        if isinstance(data, dict) and data.get('type') == 'accuracy_answers':
+            if data.get('accuracy') is not None:
+                player.accuracy_choice = data['accuracy']
+            if data.get('goal') is not None:
+                player.goal_choice = data['goal']
+            if data.get('plan') is not None:
+                player.plan_choice = data['plan']
+            if data.get('importance') is not None:
+                player.importance_choice = data['importance']
+            if data.get('customGoal'):
+                player.custom_goal = data['customGoal']
+            if data.get('customPlan'):
+                player.custom_plan = data['customPlan']
+            return
+
+        # Legacy string path: "variable_name=value" for behavioral counters
         parts = data.split('=')
         variable_name = parts[0].strip()
         value = eval(parts[1].strip())

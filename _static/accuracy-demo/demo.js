@@ -116,7 +116,24 @@ function advanceSetup(event){
   event.preventDefault();const key=['accuracy','goal','plan','importance'][step];
   if(draft[key]===null){$('error').textContent='Please choose one option.';return;}
   if(!$('custom-wrap').hidden){if(!$('custom').value.trim()){$('error').textContent='Please add your own words.';$('custom').focus();return;}draft[step===1?'customGoal':'customPlan']=$('custom').value.trim();}
-  if(step===3||step===(draft.version==='plan'?2:1)){state={...draft};$('setup').close();renderBanner();return;}
+  if(step===3||step===(draft.version==='plan'?2:1)){
+    state={...draft};
+    $('setup').close();
+    renderBanner();
+    // Submit the finalized answers to oTree via live_method
+    if (integratedDICE && typeof liveSend === 'function') {
+      liveSend({
+        type: 'accuracy_answers',
+        accuracy: state.accuracy,
+        goal: state.goal,
+        plan: state.plan,
+        importance: state.importance,
+        customGoal: state.customGoal,
+        customPlan: state.customPlan,
+      });
+    }
+    return;
+  }
   step++;renderStep();$('setup').scrollTop=0;$('choices').querySelector('input').focus();
 }
 if (integratedDICE) {
