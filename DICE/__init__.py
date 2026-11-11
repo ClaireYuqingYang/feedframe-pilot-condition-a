@@ -68,9 +68,10 @@ def creating_session(subsession):
     df = read_feed(subsession.session.config['data_path'])
     tweets = preprocessing(df)
     players = subsession.get_players()
+    CONDITIONS = ['control', 'goals', 'plan', 'importance']
     for player in players:
         player.participant.tweets = tweets
-        player.feed_condition = subsession.session.config.get('condition_name', '')
+        player.feed_condition = CONDITIONS[(player.id_in_subsession - 1) % len(CONDITIONS)]
         player.set_condition = ''
         player.participant.vars['set_condition'] = ''
 
